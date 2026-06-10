@@ -1,0 +1,27 @@
+# BROKEN ON PURPOSE - Lab 04 (permission denied).
+# Symptom: the job fails at "git push" with a 403. The default GITHUB_TOKEN here
+# is read-only, so it cannot write back to the repository.
+#
+# Hint: this job needs a permissions block granting write to contents. Nothing is
+# actually pushed when it fails, so this is safe to run.
+name: Broken 04 Permissions
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  tag-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Try to push an empty commit
+        run: |
+          git config user.name "ci"
+          git config user.email "ci@example.com"
+          git commit --allow-empty -m "ci: touch"
+          git push

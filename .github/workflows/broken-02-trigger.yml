@@ -1,0 +1,24 @@
+# BROKEN ON PURPOSE - Lab 02 (wrong trigger).
+# Symptom: you push to main but this workflow never runs.
+# The YAML is valid, but the event name is misspelled, so it triggers on nothing.
+#
+# Hint: there is no event called "pushh".
+name: Broken 02 Trigger
+
+on:
+  pushh:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm test

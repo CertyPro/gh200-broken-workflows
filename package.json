@@ -1,0 +1,11 @@
+{
+  "name": "gh200-broken-workflows",
+  "version": "1.0.0",
+  "description": "A tiny Node app for practising GitHub Actions (GH-200).",
+  "main": "src/calculator.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "author": "Certy (Coded Vision Design)"
+}

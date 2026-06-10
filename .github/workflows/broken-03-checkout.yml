@@ -1,0 +1,25 @@
+# BROKEN ON PURPOSE - Lab 03 (missing checkout).
+# Symptom: the job fails at "npm ci" with an error about no package.json / no
+# lockfile. The runner starts empty, so without actions/checkout your code is not
+# there.
+#
+# Hint: a step is missing before Node is set up.
+name: Broken 03 Checkout
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm ci
+      - run: npm test
